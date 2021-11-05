@@ -6,7 +6,7 @@
 Работа служит для улучшения навыков вёрстки.
 
 
-[https://edjme.github.io/mesto-project/]
+[https://edjme.github.io/mesto-project/index.html]
 
 
 
