@@ -17,6 +17,7 @@
     opacity: 1;
     left: calc(50% - 215px);
     justify-content: space-between;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
 }
 
 @media screen and (max-width: 767px) {
