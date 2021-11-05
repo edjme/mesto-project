@@ -13,3 +13,10 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+@media screen and (max-width: 900px) {
+    .page {
+        padding-top: 28px;
+        padding-bottom: 36px;
+    }
+}
