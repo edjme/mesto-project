@@ -7,6 +7,7 @@
 
 .header__logo:hover {
     opacity: .5;
+    transition: .8s;
 }
 
 @media screen and (max-width: 900px) {

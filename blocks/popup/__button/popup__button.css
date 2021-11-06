@@ -6,7 +6,6 @@
     cursor: pointer;
     background: #000;
     margin-top: 18px;
-    margin-bottom: 37px;
     border-radius: 2px;
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
@@ -19,14 +18,16 @@
 
 .popup__button:hover {
     opacity: .8;
+    transition: .8s;
 }
 
 @media screen and (max-width: 767px) {
     .popup__button {
+        margin: 0;
+        padding: 0;
         width: 238px;
         height: 46px;
         margin-top: 15px;
-        margin-bottom: 25px;
         font-size: 14px;
         line-height: 17px;
     }

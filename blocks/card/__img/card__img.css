@@ -15,4 +15,5 @@
 
 .card__img:hover {
     opacity: .5;
+    transition: .8s;
 }

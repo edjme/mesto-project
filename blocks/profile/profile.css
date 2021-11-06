@@ -3,7 +3,6 @@
     padding: 0;
     display: flex;
     max-width: 880px;
-    max-height: 120px;
     flex-direction: row;
     margin: 0 auto 50px;
 }
