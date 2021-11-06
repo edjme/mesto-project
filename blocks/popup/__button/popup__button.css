@@ -14,6 +14,7 @@
     line-height: 22px;
     text-align: center;
     color: #FFF;
+    margin-bottom: 29px;
 }
 
 .popup__button:hover {
@@ -30,5 +31,6 @@
         margin-top: 15px;
         font-size: 14px;
         line-height: 17px;
+        margin-bottom: 23px;
     }
 }
