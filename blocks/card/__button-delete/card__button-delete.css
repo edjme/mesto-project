@@ -9,6 +9,7 @@
     cursor: pointer;
     height: 19px;
     width: 18px;
+    z-index: 0;
 }
 
 .card__button-delete:hover {

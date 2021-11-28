@@ -1,16 +1,66 @@
 const profilePopup = document.querySelector('.popup_type_profile')
-const cardPopup = document.querySelector('.popup_type_card')
+// const cardPopup = document.querySelector('.popup_type_card')
 const imagePopup = document.querySelector('.popup_type_image')
+
 const popupElement = document.querySelector('.popup')
-const openPopupButton=document.querySelector('.profile__edit-button')
+const openPopupButton = document.querySelector('.profile__edit-button')
+const openPopupImage = document.querySelector('.card__photo')
+
 let nameInPopup = document.querySelector('.input__text_type_username')
 let jobInPopup = document.querySelector('.input__text_type_job')
 let nameInProfile = document.querySelector('.profile__name')
 let jobInProfile = document.querySelector('.profile__job')
 const form = document.querySelector('.popup__form')
+
+// const addForm = profileEditPopup.querySelector('.popup__form') // Форма редактирования профиля. Нашли через попап
+// const addNameInput = profileForm.querySelector('.input__name') // Поле формы с именем пользователя. Нашли через форму
+// const addLinkInput = profileForm.querySelector('.input__link') // Поле формы с подписью пользователя. Нашли через форму
+
+
+
 // переменные связанные с созданием карточки
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.card')
 const cardList = document.querySelector('.cards')
+
+
+
+
+
+// const profileNameElement = document.querySelector('.profile__name') // Имя пользователя в профиле
+// const profileAboutElement = document.querySelector('.profile__about') // Подпись пользователя в профиле
+const addButton = document.querySelector('.profile__add-button') // Кнопка добавления карточки
+const cardPopup = document.querySelector('.popup_type_card') // Попап добавления карточки
+const addForm = cardPopup.querySelector('.popup__form') // Форма добавления карточки. Нашли через попап
+const addNameInput = addForm.querySelector('.input__name-name') // Поле формы с названием. Нашли через форму
+const addLiinkInput = addForm.querySelector('.input__link') // Поле формы с ссылкой. Нашли через форму
+
+
+// // По нажатию на кнопку...
+// addButton.addEventListener('click', () => {
+//   // Открываем попап
+//   openPopup(profilePopup)
+// })
+
+// // При сохранении формы...
+// addForm.addEventListener('submit', (event) => {
+//   // Обязательно отменяем действие по умолчанию, чтобы страница не перезагружалась
+//   event.preventDefault()
+
+//   // Сохраняем данные из полей обратно в верстку
+//   // profileNameElement.textContent = profileNameInput.value
+//   // profileAboutElement.textContent = profileAboutInput.value
+
+//   createCard()
+
+
+//   // Закрываем попап
+//   closePopup(addForm)
+// })
+
+
+
+
+
 
 
 
@@ -23,6 +73,8 @@ function openPopup(popup) {
   function closePopup(popup) {
     popup.classList.remove('popup_opened')
   }
+
+
 
 function formSubmitHandler(evt) {
   evt.preventDefault()
@@ -38,13 +90,46 @@ function formSubmitHandler(evt) {
     openPopup(profilePopup)
   })
 
-  document.querySelector('.profile__add-button').addEventListener('click', function () {
-    // renderCard(cardList, createCard('Заголовок', 'ссылка'))
-    openPopup(cardPopup)
+
+// сохранить новые данные
+  openPopupButton.addEventListener('click', function () {
+    nameInPopup.value = nameInProfile.textContent;
+    jobInPopup.value = jobInProfile.textContent;
+    openPopup(profilePopup)
   })
+
+
+  function formSubmitHandler(evt) {
+    evt.preventDefault()
+    nameInProfile.textContent = nameInPopup.value;
+    jobInProfile.textContent = jobInPopup.value;
+    closePopup(popupElement);
+  }
+
+
+
+
+
+
+  imagePopup.addEventListener('click', function () {
+    openPopup(imagePopup)
+  })
+
+// открывает попап для создания карточки
+  // document.querySelector('.profile__add-button').addEventListener('click', function () {
+  //   openPopup(cardPopup)
+  // })
+
+  // document.querySelector('.card').addEventListener('click', function () {
+  //   openPopup(imagePopup)
+  // })
 
   profilePopup.querySelector('.popup__close').addEventListener('click', function () {
     closePopup(profilePopup)
+  })
+
+  imagePopup.querySelector('.popup__close').addEventListener('click', function () {
+    closePopup(imagePopup)
   })
 
   cardPopup.querySelector('.popup__close').addEventListener('click', function () {
@@ -129,6 +214,31 @@ initialCards.forEach(card => renderCard(cardList, createCard(card.title, card.li
 
 
 
+// По нажатию на кнопку...
+addButton.addEventListener('click', () => {
+  // Открываем попап
+  openPopup(cardPopup)
+})
+
+// При сохранении формы...
+addForm.addEventListener('submit', (event) => {
+  // Обязательно отменяем действие по умолчанию, чтобы страница не перезагружалась
+  event.preventDefault()
+
+  // Сохраняем данные из полей обратно в верстку
+  // profileNameElement.textContent = profileNameInput.value
+  // profileAboutElement.textContent = profileAboutInput.value
+
+  // createCard(card.title, card.link)
+  initialCards.forEach(card => renderCard(cardList, createCard(event.title, event.link)))
+
+  // Закрываем попап
+  closePopup(addForm)
+})
+
+
+
+
 
 
 
@@ -138,18 +248,5 @@ initialCards.forEach(card => renderCard(cardList, createCard(card.title, card.li
 //   popupElement.addEventListener('click', (event) => { console.log(event)
 //   if (event.target.classList.contains('popup')) {
 //     closePopup(popupElement)
-//   }
-// })
-
-
-
-
-// popupElement.querySelector(".popup__content").addEventListener("click", (event) => {
-//   event.stopPropagation()
-// })
-
-// popupElement.addEventListener('click', (event) => {
-//   if (event.target.classList.contains('popup')) {
-//     closePopup(cardPopup)
 //   }
 // })
