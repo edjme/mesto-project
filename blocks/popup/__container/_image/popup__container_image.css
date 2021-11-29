@@ -1,4 +1,11 @@
 .popup__container_image {
     background: none;
     box-shadow: none;
+    width: 800px;
+}
+
+@media screen and (max-width: 767px) {
+    .popup__container_image {
+        max-width: 240px;
+    }
 }

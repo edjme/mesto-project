@@ -3,7 +3,11 @@ const imagePopup = document.querySelector('.popup_type_image')
 
 const popupElement = document.querySelector('.popup')
 const openPopupButton = document.querySelector('.profile__edit-button')
-const openPopupImage = document.querySelector('.card__photo')
+const openPopupImage = document.querySelector('.card__image')
+
+const popupSubtitle = document.querySelector('.popup__subtitle')
+
+const card = document.querySelector('.card')
 
 let nameInPopup = document.querySelector('.input__text_type_username')
 let jobInPopup = document.querySelector('.input__text_type_job')
@@ -113,9 +117,12 @@ const createCard = (title, link) => {
   imageElement.src = link
   imageElement.alt = title
 
-  imageElement.addEventListener('click', function() {
-    openPopup(imagePopup)
-  })
+  imageElement.addEventListener('click', function(event) {
+    imagePopup.querySelector('.card__image').src = event.target.src;
+    imagePopup.querySelector('.card__image').alt = event.target.alt;
+    imagePopup.querySelector('.card__subtitle').textContent = event.target.closest('.card').querySelector('.card__title').textContent;
+    openPopup(imagePopup);
+});
 
   cardElement.querySelector('.card__img').addEventListener('click', handleCardLikeClick)
 
@@ -152,7 +159,9 @@ addForm.addEventListener('submit', (event) => {
 
   
 
+function popupDO () {
 
+}
 
 
 

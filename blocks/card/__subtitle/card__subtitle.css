@@ -1,0 +1,10 @@
+.card__subtitle {
+font-family: 'Inter', 'Arial', sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 15px;
+color: #FFF;
+display: flex;
+align-self: start;
+}
