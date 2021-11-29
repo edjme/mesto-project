@@ -1,5 +1,4 @@
 const profilePopup = document.querySelector('.popup_type_profile')
-// const cardPopup = document.querySelector('.popup_type_card')
 const imagePopup = document.querySelector('.popup_type_image')
 
 const popupElement = document.querySelector('.popup')
@@ -16,56 +15,20 @@ const form = profilePopup.querySelector('.popup__form')
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.card')
 const cardList = document.querySelector('.cards')
 
-
-
-// const profileNameElement = document.querySelector('.profile__name') // Имя пользователя в профиле
-// const profileAboutElement = document.querySelector('.profile__about') // Подпись пользователя в профиле
 const addButton = document.querySelector('.profile__add-button') // Кнопка добавления карточки
 const cardPopup = document.querySelector('.popup_type_card') // Попап добавления карточки
 const addForm = cardPopup.querySelector('.popup__form') // Форма добавления карточки. Нашли через попап
 const addNameInput = addForm.querySelector('.input__name-name') // Поле формы с названием. Нашли через форму
 const addLiinkInput = addForm.querySelector('.input__link') // Поле формы с ссылкой. Нашли через форму
 
-
-// // По нажатию на кнопку...
-// addButton.addEventListener('click', () => {
-//   // Открываем попап
-//   openPopup(profilePopup)
-// })
-
-// // При сохранении формы...
-// addForm.addEventListener('submit', (event) => {
-//   // Обязательно отменяем действие по умолчанию, чтобы страница не перезагружалась
-//   event.preventDefault()
-
-//   // Сохраняем данные из полей обратно в верстку
-//   // profileNameElement.textContent = profileNameInput.value
-//   // profileAboutElement.textContent = profileAboutInput.value
-
-//   createCard()
-
-
-//   // Закрываем попап
-//   closePopup(addForm)
-// })
-
-
-
-
-
-
-
-
-
 // ф-я открытия попапа
 function openPopup(popup) {
-    popup.classList.add('popup_opened')
-  }
+  popup.classList.add('popup_opened')
+}
 // ф-я закрытия попапа
 function closePopup(popup) {
  popup.classList.remove('popup_opened')
 }
-
 
 function formSubmitHandler(evt) {
   evt.preventDefault()
@@ -75,39 +38,34 @@ function formSubmitHandler(evt) {
 }
 
 // подтягивает текст в попап и открывает его по нажатию кнопки
-  openPopupButton.addEventListener('click', function () {
-    nameInPopup.value = nameInProfile.textContent;
-    jobInPopup.value = jobInProfile.textContent;
-    openPopup(profilePopup)
-  })
+openPopupButton.addEventListener('click', function () {
+  nameInPopup.value = nameInProfile.textContent;
+  jobInPopup.value = jobInProfile.textContent;
+  openPopup(profilePopup)
+})
 
 
-  imagePopup.addEventListener('click', function () {
-    openPopup(imagePopup)
-  })
+
+
+
+
 
 // открывает попап для создания карточки
   document.querySelector('.profile__add-button').addEventListener('click', function () {
-    openPopup(cardPopup)
-  })
+  openPopup(cardPopup)
+})
 
-  // document.querySelector('.card').addEventListener('click', function () {
-  //   openPopup(imagePopup)
-  // })
+profilePopup.querySelector('.popup__close').addEventListener('click', function () {
+  closePopup(profilePopup)
+})
 
-  profilePopup.querySelector('.popup__close').addEventListener('click', function () {
-    closePopup(profilePopup)
-  })
+imagePopup.querySelector('.popup__close').addEventListener('click', function () {
+ closePopup(imagePopup)
+})
 
-  imagePopup.querySelector('.popup__close').addEventListener('click', function () {
-    closePopup(imagePopup)
-  })
-
-  cardPopup.querySelector('.popup__close').addEventListener('click', function () {
-    closePopup(cardPopup)
-  })
-
-
+cardPopup.querySelector('.popup__close').addEventListener('click', function () {
+  closePopup(cardPopup)
+})
 
 //ф-я закрытия попапа с сохранением новых данных
 form.addEventListener('submit', formSubmitHandler);
@@ -155,6 +113,10 @@ const createCard = (title, link) => {
   imageElement.src = link
   imageElement.alt = title
 
+  imageElement.addEventListener('click', function() {
+    openPopup(imagePopup)
+  })
+
   cardElement.querySelector('.card__img').addEventListener('click', handleCardLikeClick)
 
   cardElement.querySelector('.card__button-delete').addEventListener('click', handleCardRemoveClick)
@@ -177,23 +139,56 @@ const handleCardRemoveClick = (event) => {
   event.target.closest('.card').remove()
 } 
 
-
 initialCards.forEach(card => renderCard(cardList, createCard(card.title, card.link)))
-
-
 
 addForm.addEventListener('submit', (event) => {
   event.preventDefault()
-  
   const name = addForm.querySelector('.input__name').value
   const link = addForm.querySelector('.input__link').value
-  
   renderCard(cardList, createCard(name, link))
   closePopup(cardPopup)
 })
 
 
   
+
+
+
+
+
+
+
+
+
+
+// const popupImages = (evt) => {
+//   const imageLink = evt.target.setAttribute("src", link);
+//   const nameImages = evt.target.setAttribute("alt", title);
+//   document.querySelector(".popup__subtitle").textContent = title;
+//   document.querySelector(".popup__image").setAttribute("src", link);
+//   document.querySelector(".popup__image").setAttribute("alt", title);
+//   openPopup(imagePopup)
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // крутая фича, которая не работает
 
 //   popupElement.addEventListener('click', (event) => { console.log(event)
