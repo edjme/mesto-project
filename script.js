@@ -9,10 +9,10 @@ const popupSubtitle = document.querySelector('.popup__subtitle')
 
 const card = document.querySelector('.card')
 
-let nameInPopup = document.querySelector('.input__text_type_username')
-let jobInPopup = document.querySelector('.input__text_type_job')
-let nameInProfile = document.querySelector('.profile__name')
-let jobInProfile = document.querySelector('.profile__job')
+const nameInPopup = document.querySelector('.input__text_type_username')
+const jobInPopup = document.querySelector('.input__text_type_job')
+const nameInProfile = document.querySelector('.profile__name')
+const jobInProfile = document.querySelector('.profile__job')
 const form = profilePopup.querySelector('.popup__form')
 
 // переменные связанные с созданием карточки
@@ -47,12 +47,6 @@ openPopupButton.addEventListener('click', function () {
   jobInPopup.value = jobInProfile.textContent;
   openPopup(profilePopup)
 })
-
-
-
-
-
-
 
 // открывает попап для создания карточки
   document.querySelector('.profile__add-button').addEventListener('click', function () {
@@ -154,46 +148,9 @@ addForm.addEventListener('submit', (event) => {
   const link = addForm.querySelector('.input__link').value
   renderCard(cardList, createCard(name, link))
   closePopup(cardPopup)
+  addForm.querySelector('.input__name').value = "";
+  addForm.querySelector('.input__link').value = "";
 })
-
-
-  
-
-function popupDO () {
-
-}
-
-
-
-
-
-
-
-
-// const popupImages = (evt) => {
-//   const imageLink = evt.target.setAttribute("src", link);
-//   const nameImages = evt.target.setAttribute("alt", title);
-//   document.querySelector(".popup__subtitle").textContent = title;
-//   document.querySelector(".popup__image").setAttribute("src", link);
-//   document.querySelector(".popup__image").setAttribute("alt", title);
-//   openPopup(imagePopup)
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

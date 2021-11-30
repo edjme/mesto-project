@@ -1,7 +1,8 @@
 .popup__container_image {
     background: none;
     box-shadow: none;
-    width: 800px;
+    max-width: 816px;
+    min-width: 433px;
 }
 
 @media screen and (max-width: 767px) {
