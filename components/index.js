@@ -34,6 +34,7 @@ function closePopup(popup) {
  popup.classList.remove('popup_opened')
 }
 
+//ф-я передачи новых данных в попап редактирования профиля
 function formSubmitHandler(evt) {
   evt.preventDefault()
   nameInProfile.textContent = nameInPopup.value;
@@ -53,6 +54,7 @@ openPopupButton.addEventListener('click', function () {
   openPopup(cardPopup)
 })
 
+//закрывает попап для создания карточки
 profilePopup.querySelector('.popup__close').addEventListener('click', function () {
   closePopup(profilePopup)
 })
@@ -152,13 +154,20 @@ addForm.addEventListener('submit', (event) => {
   addForm.querySelector('.input__link').value = "";
 })
 
+//ф-ия закрытия попапа с клавиатуры
 
+document.addEventListener('keydown', (event) => {
+  if (event.key === "Escape") { 
+    const popupOpened = document.querySelector('.popup_opened')
 
+    closePopup(popupOpened)
+  }
+});
 
-// крутая фича, которая не работает
+//ф-ия закрытия попапа с мыши
 
-//   popupElement.addEventListener('click', (event) => { console.log(event)
-//   if (event.target.classList.contains('popup')) {
-//     closePopup(popupElement)
-//   }
-// })
+  document.addEventListener('click', (event) => { 
+    if (event.target.classList.contains('popup_opened')) {
+      closePopup(event.target)
+    }
+})
