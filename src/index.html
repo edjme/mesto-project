@@ -5,17 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mestro</title>
-    <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
 
     <header class="header">
-        <a class="header__logo" href="#"><img src="./image/logo.svg" alt="лого"></a>
+        <a class="header__logo" href="#"><img src="<%=require('./image/logo.svg')%>" alt="лого"></a>
     </header>
 
 <main class="main">
     <section class="profile">
-            <img class="profile__avatar" src="./image/profile/Avatar.png" alt="аватар">
+            <img class="profile__avatar" src="<%=require('./image/profile/Avatar.png')%>" alt="аватар">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <button class="profile__edit-button" type="button"></button>
@@ -52,7 +51,6 @@
 </div>
 
 <div class="popup popup_type_card">
-
     <div class="popup__container">
         <button type="button" class="popup__close" aria-label="Закрыть"></button>
         <h2 class="popup__title">Новое место</h2>
@@ -70,7 +68,6 @@
                 <button type="submit" class="popup__button popup__button_disabled" disabled>Создать</button>
             </form> 
     </div>
-
 </div>
 
  <div class="popup popup_type_image">
@@ -91,9 +88,6 @@
         </div>
     </article>
 </template>
-
-<script src="./components/index.js"></script>
-<script src="./components/validate.js"></script>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-// //ВАЛИДАЦИЯ ФОРМ
+//ВАЛИДАЦИЯ ФОРМ
 
 const showError = (errorElement, inputElement, config) => {
     inputElement.classList.add(config.inputErrorClass);
@@ -47,19 +47,17 @@ const setEventListeners = (formElement, config) => {
     })
 }
 
-const enableValidation = (config) => {
+export const enableValidation = (config) => {
     const forms = document.querySelectorAll(config.formSelector);
     [...forms].forEach(form => {
         setEventListeners(form, config)
     })
 }
 
-const validationConfig = {
+export const validationConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__line',
     submitButtonSelector: '.popup__button',
     inactiveButtonClass: 'popup__button_disabled',
     inputErrorClass: 'popup_line-error',
 }
-
-enableValidation(validationConfig)
