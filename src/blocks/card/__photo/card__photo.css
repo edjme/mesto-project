@@ -3,4 +3,10 @@
     padding: 0;
     height: 282px;
     width: 282px;
+    cursor: pointer;
+}
+
+.card__photo:hover {
+    opacity: .8;
+    transition: .8s;
 }

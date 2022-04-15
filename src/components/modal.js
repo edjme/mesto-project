@@ -1,5 +1,5 @@
 import {
-    popupElement, openPopupButton, nameInPopup, 
+    nameInPopup, 
     jobInPopup, nameInProfile, jobInProfile, 
     form, profilePopup, imagePopup, 
     cardPopup} from './constants.js'
@@ -11,23 +11,16 @@ export function openPopup(popup) {
 
 // ф-я закрытия попапа
 export function closePopup(popup) {
-   popup.classList.remove('popup_opened')
+    popup.classList.remove('popup_opened')
 }
-  
+
 //ф-я передачи новых данных в попап редактирования профиля
-function formSubmitHandler(evt) {
+function submitProfileForm(evt) {
     evt.preventDefault()
     nameInProfile.textContent = nameInPopup.value;
     jobInProfile.textContent = jobInPopup.value;
-    closePopup(popupElement);
+    closePopup(profilePopup);
 }
-  
-// подтягивает текст в попап и открывает его по нажатию кнопки
-openPopupButton.addEventListener('click', function () {
-    nameInPopup.value = nameInProfile.textContent;
-    jobInPopup.value = jobInProfile.textContent;
-    openPopup(profilePopup)
-})
 
 // открывает попап для создания карточки
 document.querySelector('.profile__add-button').addEventListener('click', function () {
@@ -48,20 +41,25 @@ cardPopup.querySelector('.popup__close').addEventListener('click', function () {
 })
 
 //ф-я закрытия попапа с сохранением новых данных
-form.addEventListener('submit', formSubmitHandler);
+form.addEventListener('submit', submitProfileForm);
 
 //ф-ия закрытия попапа с клавиатуры
-document.addEventListener('keydown', (event) => {
-    if (event.key === "Escape") { 
-        const popupOpened = document.querySelector('.popup_opened')
+function closeByEsc(evt) {
+    if (evt.key === "Escape") {
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(openedPopup); 
+    }
+} 
+//вызываю ф-ию закрытия попапа с клавиатуры
+document.addEventListener('keydown',  closeByEsc)
 
-        closePopup(popupOpened)
-        }
-});
 
 //ф-ия закрытия попапа с мыши
-document.addEventListener('click', (event) => { 
-    if (event.target.classList.contains('popup_opened')) {
-    closePopup(event.target)
+function closeByMs(evt) {
+    if (evt.target.classList.contains('popup_opened')) {
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(evt.target); 
     }
-})
+} 
+//вызываю ф-ию закрытия попапа с мыши
+document.addEventListener('mouseup',  closeByMs)

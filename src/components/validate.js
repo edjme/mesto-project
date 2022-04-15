@@ -1,5 +1,4 @@
 //ВАЛИДАЦИЯ ФОРМ
-
 const showError = (errorElement, inputElement, config) => {
     inputElement.classList.add(config.inputErrorClass);
     errorElement.textContent = inputElement.validationMessage;
@@ -20,7 +19,7 @@ const checkInputValidity = (inputElement, formElement, config) => {
     }
 }
 
-const toggleButtonState = (button, isActive = false, config) => {
+export const toggleButtonState = (button, isActive = false, config) => {
     if (isActive) {
         button.classList.remove(config.inactiveButtonClass);
         button.disabled = false;
@@ -34,17 +33,18 @@ const setEventListeners = (formElement, config) => {
     const inputList = formElement.querySelectorAll(config.inputSelector);
     const submitButton = formElement.querySelector(config.submitButtonSelector);
 
-    formElement.addEventListener('submit', (e) => {
-        e.preventDefault();
-        console.log('всё пучком');
-    });
-
     [...inputList].forEach(input => {
-        input.addEventListener('input', (e) => {
+        input.addEventListener('input', () => {
             checkInputValidity(input, formElement, config);
             toggleButtonState(submitButton, formElement.checkValidity(), config)
         })
     })
+
+    formElement.addEventListener('submit', (e) => {
+        e.preventDefault();
+        toggleButtonState(submitButton, formElement.checkValidity(), config)
+        console.log('всё пучком');
+    });
 }
 
 export const enableValidation = (config) => {
