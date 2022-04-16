@@ -8,8 +8,10 @@ enableValidation(validationConfig)
 // Подключение отрисовки карточек
 import {renderCard, createCard} from './card'
 
-import {profilePopup, openPopupButton, nameInPopup, jobInPopup, nameInProfile, jobInProfile, cardList} from './constants'
-import {openPopup} from './modal'
+import {profilePopup, openPopupButton, nameInPopup, 
+    jobInPopup, nameInProfile, jobInProfile, 
+    cardList, inputName, inputLink, addForm, cardPopup, imagePopup} from './constants'
+import {openPopup, closePopup} from './modal'
 
 // подтягивает текст в попап и открывает его по нажатию кнопки
 openPopupButton.addEventListener('click', function () {
@@ -17,6 +19,36 @@ openPopupButton.addEventListener('click', function () {
     jobInPopup.value = jobInProfile.textContent;
     openPopup(profilePopup)
 })
+
+//ф-я передачи новых данных в попап редактирования профиля
+function submitProfileForm(evt) {
+    evt.preventDefault()
+    nameInProfile.textContent = nameInPopup.value;
+    jobInProfile.textContent = jobInPopup.value;
+    closePopup(profilePopup);
+}
+
+// открывает попап для создания карточки
+document.querySelector('.profile__add-button').addEventListener('click', function () {
+    openPopup(cardPopup)
+})
+
+//закрывает попап для создания карточки
+profilePopup.querySelector('.popup__close').addEventListener('click', function () {
+    closePopup(profilePopup)
+})
+
+imagePopup.querySelector('.popup__close').addEventListener('click', function () {
+    closePopup(imagePopup)
+})
+
+cardPopup.querySelector('.popup__close').addEventListener('click', function () {
+    closePopup(cardPopup)
+})
+
+//ф-я закрытия попапа с сохранением новых данных
+form.addEventListener('submit', submitProfileForm);
+
 
 // РАБОТА С КАРТОЧКАМИ
 export const initialCards = [
@@ -51,3 +83,14 @@ export const initialCards = [
 ]; 
 
 initialCards.forEach(card => renderCard(cardList, createCard(card.title, card.link)))
+
+
+addForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+    const name = inputName.value
+    const link = inputLink.value
+    renderCard(cardList, createCard(name, link))
+    closePopup(cardPopup)
+    inputName.value = "";
+    inputLink.value = "";
+})

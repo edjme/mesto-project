@@ -1,10 +1,11 @@
 import {
-  cardTemplate, cardList, 
-  cardPopup, addForm, imagePopup, inputName, inputLink, cardImage} from './constants'
+  cardTemplate, imagePopup, cardImage} from './constants'
 
-import {openPopup, closePopup} from './modal'  
+import {openPopup} from './modal'  
 
 import { toggleButtonState } from './validate'
+
+import {addForm} from './index'
 
 // создание карточки
 export const createCard = (title, link) => {
@@ -30,28 +31,18 @@ export const createCard = (title, link) => {
 
   return cardElement
 }
-  
-  // Функция добавления элемента карточки в верстку (рендер карточки)
-  export const renderCard = (cardList, cardElement) => {
-    cardList.prepend(cardElement)
-  }
-  
-  // Лайки
-  const handleCardLikeClick = (event) => {
-    event.target.classList.toggle('card__img_active')
-  }
-  
+
+// Функция добавления элемента карточки в верстку (рендер карточки)
+export const renderCard = (cardList, cardElement) => {
+  cardList.prepend(cardElement)
+}
+
+// Лайки
+const handleCardLikeClick = (event) => {
+  event.target.classList.toggle('card__img_active')
+}
+
   // Удаление карточки
-  const handleCardRemoveClick = (event) => {
-    event.target.closest('.card').remove()
-  } 
-  
-  addForm.addEventListener('submit', (event) => {
-    event.preventDefault()
-    const name = inputName.value
-    const link = inputLink.value
-    renderCard(cardList, createCard(name, link))
-    closePopup(cardPopup)
-    inputName.value = "";
-    inputLink.value = "";
-  })
+const handleCardRemoveClick = (event) => {
+  event.target.closest('.card').remove()
+} 
