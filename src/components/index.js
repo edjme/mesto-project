@@ -1,6 +1,9 @@
 // подключениее CSS
 import '../pages/index.css'
 
+//api
+import {getAllTasks, addTasks, removeAllTasks, editTask} from './api'
+
 // Подключение валидации
 import {enableValidation, validationConfig} from './validate.js'
 enableValidation(validationConfig)
@@ -85,6 +88,14 @@ export const initialCards = [
 initialCards.forEach(card => renderCard(cardList, createCard(card.title, card.link)))
 
 
+
+
+
+
+
+
+
+
 addForm.addEventListener('submit', (event) => {
     event.preventDefault()
     const name = inputName.value
@@ -94,3 +105,10 @@ addForm.addEventListener('submit', (event) => {
     inputName.value = "";
     inputLink.value = "";
 })
+
+getAllTasks()
+    .then((dataFromServer) => {
+        dataFromServer(dataFromServer, cardList, 'append')
+    })
+
+    
