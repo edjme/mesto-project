@@ -1,7 +1,7 @@
 const config = {
     url: 'https://nomoreparties.co/v1/plus-cohort-8',
     headers: {
-        authorization: '38053800-14c5-4c22-ac44-33381f46c6f6',
+        authorization: '42de998b-e70a-417c-91c6-8efdcf613573',
         "Content-type": "application/json"
     },
 }
@@ -11,7 +11,7 @@ const onResponse = (res) => {
 }
 
 export function getInitialCards() {
-    return fetch(config.url)
+    return fetch(`${config.url}/${cards}`)
         .then(onResponse)
 }
 

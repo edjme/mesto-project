@@ -4,6 +4,17 @@
     margin-right: 30px;
     width: 120px;
     height: 120px;
+    cursor: pointer;
+}
+
+.profile__avatar:hover {
+    opacity: .6;
+    transition: .8s;
+    /* background: url("../../../image/profile/Edit-Button.svg") center no-repeat; */
+}
+
+.profile__avatar:hover {
+    background: url("../../../image/profile/Edit-Button.svg") center no-repeat;
 }
 
 @media screen and (max-width: 900px) {
