@@ -1,0 +1,30 @@
+ .profile__avatar_active {
+     display: flex;
+    margin: 0;
+    padding: 0;
+    margin-right: 30px;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+}
+
+.profile__avatar_active:hover {
+    background: transparent url("../../../../image/profile/Edit-Button.svg") center no-repeat;
+    background-size: 26px 26px;
+    opacity: 1;
+}
+
+@media screen and (max-width: 900px) {
+    .profile__avatar_active {
+        margin-left: 27px;
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .profile__avatar_active {
+        margin-right: 0;
+        margin-left: 0;
+        margin-bottom: 26px;
+    }
+}
