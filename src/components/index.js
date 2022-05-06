@@ -106,10 +106,13 @@ addForm.addEventListener('submit', (event) => {
     inputLink.value = "";
 })
 
-getInitialCards()
-    .then((initialCards) => {
-        // dataFromServer(dataFromServer, renderCard, 'append')
-        initialCards.forEach(card => renderCard(cardList, createCard(card.title, card.link)))
-    })
+// getInitialCards()
+//     .then((initialCards) => {
+//         // dataFromServer(dataFromServer, renderCard, 'append')
+//         initialCards.forEach(card => renderCard(cardList, createCard(card.title, card.link)))
+//     })
 
-    
+getInitialCards()
+.then((initialCards) => {
+    initialCards.forEach(card => renderCard(cardList, createCard(card.title, card.link)))
+})
