@@ -15,12 +15,17 @@
 <main class="main">
     <section class="profile">
         <div class="profile__avatar_active">
-            <img class="profile__avatar" src="<%=require('./image/profile/Avatar.png')%>" alt="аватар">
+            <img class="profile__avatar" src="" alt="аватар">
+        
+            <!-- src="<%=require('./image/profile/Avatar.png')%>" -->
+
         </div>
             <div class="profile__info">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <h1 class="profile__name"></h1>
+                <!-- Жак-Ив Кусто -->
                 <button class="profile__edit-button" type="button"></button>
-                <p class="profile__job">Исследователь океана</p>
+                <p class="profile__job"></p>
+                <!-- Исследователь океана -->
             </div>
             <button class="profile__add-button" type="button"></button>
     </section>
@@ -86,7 +91,11 @@
         <img class="card__photo" src="" alt="фото">
         <div class="card__text">
             <h2 class="card__title"></h2>
-            <button class="card__img" type="button"></button>
+            <div class="card__likes">
+                <button class="card__img" type="button"></button>
+                <div class="card__volume-likes">1</div>
+            </div>
+            
         </div>
     </article>
 </template>

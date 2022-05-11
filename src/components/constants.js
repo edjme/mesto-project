@@ -6,6 +6,7 @@ export const jobInPopup = document.querySelector('.input__text_type_job')
 export const nameInProfile = document.querySelector('.profile__name')
 export const jobInProfile = document.querySelector('.profile__job')
 export const form = profilePopup.querySelector('.popup__form')
+export const avatarInProfile = document.querySelector('.profile__avatar')
 
 // переменные связанные с созданием карточки
 export const cardTemplate = document.querySelector('#card-template').content.querySelector('.card')
@@ -15,3 +16,4 @@ export const addForm = cardPopup.querySelector('.popup__form') // Форма д�
 export const inputName = addForm.querySelector('.input__name') // Поле формы с названием. Нашли через форму
 export const inputLink = addForm.querySelector('.input__link') // Поле формы с ссылкой. Нашли через форму
 export const cardImage = imagePopup.querySelector('.card__image')
+export const volumeLikes = document.querySelector('.card__volume-likes')

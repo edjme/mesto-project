@@ -2,7 +2,7 @@
 import '../pages/index.css'
 
 //api
-import {getInitialCards, addCard, removeCard, editTask} from './api'
+import {getInitialCards, getMyProfile, changeMyProfile, addCard, likesCard, removeCard, editTask} from './api'
 
 // Подключение валидации
 import {enableValidation, validationConfig} from './validate.js'
@@ -13,7 +13,9 @@ import {renderCard, createCard} from './card'
 
 import {profilePopup, openPopupButton, nameInPopup, 
     jobInPopup, nameInProfile, jobInProfile, 
-    cardList, inputName, inputLink, addForm, cardPopup, imagePopup} from './constants'
+    cardList, inputName, inputLink, addForm, 
+    cardPopup, imagePopup, cardImage,
+    avatarInProfile, volumeLikes} from './constants'
 import {openPopup, closePopup} from './modal'
 
 // подтягивает текст в попап и открывает его по нажатию кнопки
@@ -23,11 +25,19 @@ openPopupButton.addEventListener('click', function () {
     openPopup(profilePopup)
 })
 
-//ф-я передачи новых данных в попап редактирования профиля
+//ф-я передачи новых данных с попапа редактирования профиля на сервер и его отрисовка на странице 5
 function submitProfileForm(evt) {
     evt.preventDefault()
-    nameInProfile.textContent = nameInPopup.value;
-    jobInProfile.textContent = jobInPopup.value;
+
+    changeMyProfile({
+        name: nameInPopup.value,
+        about: jobInPopup.value
+    })
+    .then(dataFromServer => {
+        nameInProfile.textContent = nameInPopup.value;
+        jobInProfile.textContent = jobInPopup.value;
+    })
+
     closePopup(profilePopup);
 }
 
@@ -52,67 +62,49 @@ cardPopup.querySelector('.popup__close').addEventListener('click', function () {
 //ф-я закрытия попапа с сохранением новых данных
 form.addEventListener('submit', submitProfileForm);
 
+// // Передача данных с popup card в вёрстку
+// addForm.addEventListener('submit', (event) => {
+//     event.preventDefault()
+//     const name = inputName.value
+//     const link = inputLink.value
+//     renderCard(cardList, createCard(name, link))
+//     closePopup(cardPopup)
+//     inputName.value = "";
+//     inputLink.value = "";
+// })
 
-// РАБОТА С КАРТОЧКАМИ
-// export const initialCards = [
-//     {
-//         title: 'Архыз',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-//     },
-//     {
-//         title: 'Челябинская область',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-//     },
-//     {
-//         title: 'Иваново',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-//     },
-//     {
-//         title: 'Камчатка',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-//     },
-//     {
-//         title: 'Холмогорский район',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-//     },
-//     {
-//         title: 'Байкал',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-//     },
-//     {
-//         title: 'Принцесса Мононоке',
-//         link: 'https://i.pinimg.com/564x/61/dd/c8/61ddc8ad90c7411f7a0f421a46750fe3.jpg'
-//     }
-// ]; 
+// Отрисовка данных пользователя с сервера РАБОТАЕТ 3
+getMyProfile()
+.then((getProfile) => {
+    nameInProfile.textContent = getProfile.name;
+    jobInProfile.textContent = getProfile.about;
+    avatarInProfile.src = getProfile.avatar;
+    // console.log(getProfile._id)
+    // console.log(getProfile.avatar)
+})
 
-// initialCards.forEach(card => renderCard(cardList, createCard(card.title, card.link)))
+// Отрисовка карточек с сервера РАБОТАЕТ 4
+getInitialCards()
+.then((dataFromServerCards) => {
+    dataFromServerCards.forEach(cardItem => renderCard(cardList, createCard(cardItem)))
+})
 
-
-
-
-
-
-
-
-
-
+// Передача данных с popup card в вёрстку и на сервер РАБОТАЕТ 6
 addForm.addEventListener('submit', (event) => {
     event.preventDefault()
-    const name = inputName.value
-    const link = inputLink.value
-    renderCard(cardList, createCard(name, link))
-    closePopup(cardPopup)
-    inputName.value = "";
-    inputLink.value = "";
+
+    addCard({
+        name: inputName.value,
+        link: inputLink.value
+    })
+    .then(dataFromServer => {
+        console.log(dataFromServer.name)
+        console.log(dataFromServer.link)
+        renderCard(cardList, createCard(dataFromServer))
+        closePopup(cardPopup)
+        inputName.value = "";
+        inputLink.value = "";
+    })
+
 })
 
-// getInitialCards()
-//     .then((initialCards) => {
-//         // dataFromServer(dataFromServer, renderCard, 'append')
-//         initialCards.forEach(card => renderCard(cardList, createCard(card.title, card.link)))
-//     })
-
-getInitialCards()
-.then((initialCards) => {
-    initialCards.forEach(card => renderCard(cardList, createCard(card.title, card.link)))
-})
