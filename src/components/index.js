@@ -2,7 +2,9 @@
 import '../pages/index.css'
 
 //api
-import {getInitialCards, getMyProfile, changeMyProfile, addCard, likesCard, removeCard, editTask} from './api'
+import {getInitialCards, getMyProfile, changeMyProfile,
+    addCard, likesCard, removeCard,
+    editTask} from './api'
 
 // Подключение валидации
 import {enableValidation, validationConfig} from './validate.js'
@@ -15,7 +17,7 @@ import {profilePopup, openPopupButton, nameInPopup,
     jobInPopup, nameInProfile, jobInProfile, 
     cardList, inputName, inputLink, addForm, 
     cardPopup, imagePopup, cardImage,
-    avatarInProfile, volumeLikes} from './constants'
+    avatarInProfile, cardDeletePopup, cardDeleteButton} from './constants'
 import {openPopup, closePopup} from './modal'
 
 // подтягивает текст в попап и открывает его по нажатию кнопки
@@ -46,31 +48,44 @@ document.querySelector('.profile__add-button').addEventListener('click', functio
     openPopup(cardPopup)
 })
 
-//закрывает попап для создания карточки
+//закрывает попап для редактирования профиля
 profilePopup.querySelector('.popup__close').addEventListener('click', function () {
     closePopup(profilePopup)
 })
 
+//закрывает попап с картинкой
 imagePopup.querySelector('.popup__close').addEventListener('click', function () {
     closePopup(imagePopup)
 })
 
+//закрывает попап для создания карточки
 cardPopup.querySelector('.popup__close').addEventListener('click', function () {
     closePopup(cardPopup)
 })
 
+// //закрывает попап для удаления карточки
+// cardDeletePopup.querySelector('.popup__close').addEventListener('click', function () {
+//     closePopup(cardDeletePopup)
+// })
+
 //ф-я закрытия попапа с сохранением новых данных
 form.addEventListener('submit', submitProfileForm);
 
-// // Передача данных с popup card в вёрстку
+// // Передача данных с popup card в вёрстку и на сервер РАБОТАЕТ 6
 // addForm.addEventListener('submit', (event) => {
 //     event.preventDefault()
-//     const name = inputName.value
-//     const link = inputLink.value
-//     renderCard(cardList, createCard(name, link))
-//     closePopup(cardPopup)
-//     inputName.value = "";
-//     inputLink.value = "";
+
+//     addCard({
+//         name: inputName.value,
+//         link: inputLink.value
+//     })
+//     .then(dataFromServer => {
+//         renderCard(cardList, createCard(dataFromServer))
+//         closePopup(cardPopup)
+//         inputName.value = "";
+//         inputLink.value = "";
+//     })
+
 // })
 
 // Отрисовка данных пользователя с сервера РАБОТАЕТ 3
@@ -79,8 +94,7 @@ getMyProfile()
     nameInProfile.textContent = getProfile.name;
     jobInProfile.textContent = getProfile.about;
     avatarInProfile.src = getProfile.avatar;
-    // console.log(getProfile._id)
-    // console.log(getProfile.avatar)
+    nameInProfile.id = getProfile._id;
 })
 
 // Отрисовка карточек с сервера РАБОТАЕТ 4
@@ -98,8 +112,6 @@ addForm.addEventListener('submit', (event) => {
         link: inputLink.value
     })
     .then(dataFromServer => {
-        console.log(dataFromServer.name)
-        console.log(dataFromServer.link)
         renderCard(cardList, createCard(dataFromServer))
         closePopup(cardPopup)
         inputName.value = "";
@@ -107,4 +119,3 @@ addForm.addEventListener('submit', (event) => {
     })
 
 })
-

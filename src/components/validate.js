@@ -43,7 +43,6 @@ const setEventListeners = (formElement, config) => {
     formElement.addEventListener('submit', (e) => {
         e.preventDefault();
         toggleButtonState(submitButton, formElement.checkValidity(), config)
-        console.log('всё пучком');
     });
 }
 

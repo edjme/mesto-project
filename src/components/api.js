@@ -24,7 +24,6 @@ export const getInitialCards = () => {
         headers: config.headers
     })
         .then(onResponse)
-        // .then(res => console.log(res))
 }
 
 //Заменяет данные профиля на сервере
@@ -57,30 +56,28 @@ export const likesCard = () => {
         .then(onResponse)
         // .then(res => console.log(res))
 }
-// likesCard()
 
 //Постановка лайка
-// export const putLikesCard = (dataId) => {
-//     return fetch(`${config.url}/cards/likes/${dataId}`, {
-//         method: 'PUT',
-//         headers: config.headers,
-//         body: JSON.stringify(dataId)
-//     })
-//         .then(onResponse)
-// }
+export const putLikesCard = (dataId) => {
+    return fetch(`${config.url}/cards/likes/${dataId}`, {
+        method: 'PUT',
+        headers: config.headers,
+    })
+        .then(onResponse)
+}
 
-// //Постановка лайка
-// export const deleteLikesCard = (dataId) => {
-//     return fetch(`${config.url}/cards/likes/${dataId}`, {
-//         method: 'DELETE',
-//         headers: config.headers,
-//         body: JSON.stringify(dataId)
-//     })
-//         .then(onResponse)
-// }
+//Удаление лайка
+export const deleteLikesCard = (dataId) => {
+    return fetch(`${config.url}/cards/likes/${dataId}`, {
+        method: 'DELETE',
+        headers: config.headers,
+        // body: JSON.stringify(dataId)
+    })
+        .then(onResponse)
+}
 
 
-//Удаляет карточку на сервере
+//Удаляет карточку на сервере РАБОТАЕТ
 export const removeCard = (cardId) => {
     return fetch(`${config.url}/cards/${cardId}`, {
         method: 'DELETE',
