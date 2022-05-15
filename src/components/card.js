@@ -35,35 +35,24 @@ export const createCard = (cardItem) => {
     openPopup(imagePopup);
   });
 
-  // cardElement.querySelector('.card__img').addEventListener('click', handleCardLikeClick)
+  cardElement.querySelector('.card__img').addEventListener('click', handleCardLikeClick)
 
   // Постановка лайка на сервере
   cardElement.querySelector('.card__img').addEventListener('click', (event) => {
     putLikesCard(cardItem._id)
     .then(dataFromServer => {
             // console.log(cardItem.likes)
-
-
+    })
   })
-})
 
-
+// // Проверка на наличие id в массиве и удаление лайка
+// if ((cardItem.likes.some(e => e._id === nameInProfile.id))) {
+//   console.log(nameInProfile.id)
+// }
 
 // Отрисовка лайков с сервера РАБОТАЕТ
-if ((cardItem.likes.some((e) => e.id === nameInProfile._id))) {
-  cardElement.querySelector('.card__img').classList.toggle('card__img_active')
-}
+renderLikesFromServer(cardItem, cardElement)
 
-
-
-// Проверка на наличие id в массиве и удаление лайка
-if ((cardItem.likes.some(e => e._id === nameInProfile.id))) {
-  console.log(nameInProfile.id)
-}
-// console.log(nameInProfile.id)
-
-
-// console.log(cardItem)
 
   // Убирает корзину с карточки, если создавал не пользователь РАБОТАЕТ 8.1
   if ((cardItem.owner._id) != (nameInProfile.id)) {
@@ -81,17 +70,29 @@ if ((cardItem.likes.some(e => e._id === nameInProfile.id))) {
   })
 
   return cardElement
+
 }
+
+// Отрисовка лайков с сервера РАБОТАЕТ
+const renderLikesFromServer = (cardItem, cardElement) => {
+  if ((cardItem.likes.some((e) => e.id === nameInProfile._id))) {
+    cardElement.querySelector('.card__img').classList.add('card__img_active')
+  }
+}
+
+  // Лайки Моментальный рендер (отрисовывает моментально)
+  const handleCardLikeClick = (event) => {
+    event.target.classList.toggle('card__img_active')
+  }
+
+
 
   // Функция добавления элемента карточки в верстку (рендер карточки)
 export const renderCard = (cardList, cardElement) => {
   cardList.append(cardElement)
 }
 
-  // Лайки
-// const handleCardLikeClick = (event) => {
-//   event.target.classList.toggle('card__img_active')
-// }
+
 
 // // Переключение состояния лайка
 // function handleCardLikeClick (event) {
