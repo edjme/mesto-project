@@ -3,8 +3,7 @@ import '../pages/index.css'
 
 //api
 import {getInitialCards, getMyProfile, changeMyProfile,
-    addCard, likesCard, removeCard,
-    editTask} from './api'
+    addCard} from './api'
 
 // Подключение валидации
 import {enableValidation, validationConfig} from './validate'
@@ -16,8 +15,8 @@ import {renderCard, createCard} from './card'
 import {profilePopup, openPopupButton, nameInPopup, 
     jobInPopup, nameInProfile, jobInProfile, 
     cardList, inputName, inputLink, addForm, 
-    cardPopup, imagePopup, cardImage, form,
-    avatarInProfile, cardDeletePopup, cardDeleteButton} from './constants'
+    cardPopup, imagePopup, form,
+    avatarInProfile} from './constants'
 
     import {openPopup, closePopup} from './modal'
 
@@ -94,7 +93,6 @@ function submitCardForm (evt) {
     })
     .then(dataFromServer => {
         console.log(cardList)
-        // renderCard(cardList, createCard(dataFromServer))
         cardList.prepend(createCard(dataFromServer))
         closePopup(cardPopup)
         inputName.value = "";

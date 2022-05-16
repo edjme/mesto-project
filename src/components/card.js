@@ -28,36 +28,27 @@ export const createCard = (cardItem) => {
     openPopup(imagePopup);
   });
 
+// Отрисовка лайков с сервера РАБОТАЕТ
+renderLikesFromServer(cardItem, cardElement)
+
+
   cardElement.querySelector('.card__img').addEventListener('click', event => {
-    // serviseLike(cardElement, cardItem, event)
-    console.log(cardItem)
-  if ((cardItem.likes.some((e) => e.id === nameInProfile._id))) {
-    putLikesCard(cardItem._id)
-    .then(dataFromServer => {
-            console.log(cardItem.likes)
-            event.target.classList.add('card__img_active')
-            cardElement.querySelector('.card__volume-likes').textContent = cardItem.likes.length
-    })
-  } else {
+  if (event.target.classList.contains('card__img_active')) {
     deleteLikesCard(cardItem._id)
     .then(dataFromServer => {
-      event.target.classList.remove('card__img_active')
-      cardElement.querySelector('.card__volume-likes').textContent = cardItem.likes.length
+      console.log('лайк удалён с сервера')
+      renderLikesFromServer(dataFromServer, cardElement)
+      cardElement.querySelector('.card__volume-likes').textContent = dataFromServer.likes.length
+    })
+  } else {
+    putLikesCard(cardItem._id)
+    .then(dataFromServer => {
+      console.log('лайк добавлен на сервер')
+      renderLikesFromServer(dataFromServer, cardElement)
+      cardElement.querySelector('.card__volume-likes').textContent = dataFromServer.likes.length
     })
   }
   })
-
-  // Постановка лайка на сервере
-  // cardElement.querySelector('.card__img').addEventListener('click', (event) => {
-  //   putLikesCard(cardItem._id)
-  //   .then(dataFromServer => {
-  //           // console.log(cardItem.likes)
-  //   })
-  // })
-
-// Отрисовка лайков с сервера РАБОТАЕТ
-// renderLikesFromServer(cardItem, cardElement)
-
 
   // Убирает корзину с карточки, если создавал не пользователь РАБОТАЕТ 8.1
   if ((cardItem.owner._id) != (nameInProfile.id)) {
@@ -79,51 +70,13 @@ export const createCard = (cardItem) => {
 // Отрисовка лайков с сервера РАБОТАЕТ
 const renderLikesFromServer = (cardItem, cardElement) => {
   if (cardItem.likes.some((e) => e.id === nameInProfile._id)) {
-    cardElement.querySelector('.card__img').classList.add('card__img_active')
+    cardElement.querySelector('.card__img').classList.toggle('card__img_active')
+  } else {
+    cardElement.querySelector('.card__img').classList.remove('card__img_active')
   }
 }
-
-  // Лайки Моментальный рендер (отрисовывает моментально)
-  const handleCardLikeClick = (event) => {
-    event.target.classList.toggle('card__img_active')
-  }
-
-
 
   // Функция добавления элемента карточки в верстку (рендер карточки)
 export const renderCard = (cardList, cardElement) => {
   cardList.append(cardElement)
-}
-
-
-
-// // Переключение состояния лайка
-// function handleCardLikeClick (event) {
-//   event.target.classList.toggle('card__img_active')
-// }
-
-const serviseLike = (cardElement, cardItem, event) => {
-  
-
-  console.log(cardItem)
-  if ((cardItem.likes.some((e) => e.id === nameInProfile._id))) {
-    putLikesCard(cardItem._id)
-    .then(dataFromServer => {
-            console.log(cardItem.likes)
-            event.target.classList.add('card__img_active')
-            cardElement.querySelector('.card__volume-likes').textContent = cardItem.likes.length
-    })
-  } else {
-    deleteLikesCard(cardItem._id)
-    .then(dataFromServer => {
-      event.target.classList.remove('card__img_active')
-      cardElement.querySelector('.card__volume-likes').textContent = cardItem.likes.length
-    })
-  }
-}
-
-const checkId = (cardElement) => {
-  if ((cardItem.likes.some((e) => e.id === nameInProfile._id))) {
-    cardElement.querySelector('.card__img').classList.toggle('card__img_active')
-  }
 }
