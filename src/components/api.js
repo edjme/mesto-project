@@ -7,7 +7,7 @@ const config = {
 }
 
 const onResponse = (res) => {
-    return res.ok ? res.json() : Promise.reject(res)
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
 }
 
 //Даёт данные профиля с сервера
@@ -95,3 +95,5 @@ export const editCard = (dataId) => {
     })
         .then(onResponse)
 }
+
+// я проверяю работу ветки LIKER
