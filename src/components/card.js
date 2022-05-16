@@ -28,32 +28,28 @@ export const createCard = (cardItem) => {
     openPopup(imagePopup);
   });
 
-// Отрисовка лайков с сервера РАБОТАЕТ
-renderLikesFromServer(cardItem, cardElement)
-
-
   cardElement.querySelector('.card__img').addEventListener('click', event => {
   if (event.target.classList.contains('card__img_active')) {
     deleteLikesCard(cardItem._id)
     .then(dataFromServer => {
       console.log('лайк удалён с сервера')
-      renderLikesFromServer(dataFromServer, cardElement)
+      cardElement.querySelector('.card__img').classList.remove('card__img_active')
       cardElement.querySelector('.card__volume-likes').textContent = dataFromServer.likes.length
     })
     .catch((err) => {
       console.log(err)
     })
   } else {
-    putLikesCard(cardItem._id)
-    .then(dataFromServer => {
-      console.log('лайк добавлен на сервер')
-      renderLikesFromServer(dataFromServer, cardElement)
-      cardElement.querySelector('.card__volume-likes').textContent = dataFromServer.likes.length
-    })
-    .catch((err) => {
-      console.log(err)
-    }) 
-  }
+      putLikesCard(cardItem._id)
+      .then(dataFromServer => {
+        console.log('лайк добавлен на сервер')
+        cardElement.querySelector('.card__img').classList.add('card__img_active')
+        cardElement.querySelector('.card__volume-likes').textContent = dataFromServer.likes.length
+      })
+      .catch((err) => {
+        console.log(err)
+      }) 
+    }
   })
 
   // Убирает корзину с карточки, если создавал не пользователь РАБОТАЕТ 8.1
@@ -72,16 +68,16 @@ renderLikesFromServer(cardItem, cardElement)
       })
   })
 
+  renderLikes(cardItem, cardElement)
+
   return cardElement
 
 }
 
-// Отрисовка лайков с сервера РАБОТАЕТ
-const renderLikesFromServer = (cardItem, cardElement) => {
-  if (cardItem.likes.some((e) => e.id === nameInProfile._id)) {
-    cardElement.querySelector('.card__img').classList.toggle('card__img_active')
-  } else {
-    cardElement.querySelector('.card__img').classList.remove('card__img_active')
+// Отрисовка лайков с сервера общая
+const renderLikes = (cardItem, cardElement) => {
+  if (cardItem.likes.some((e) => e._id === nameInProfile.id)) {
+    cardElement.querySelector('.card__img').classList.add('card__img_active')
   }
 }
 
