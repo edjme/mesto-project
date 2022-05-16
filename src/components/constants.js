@@ -7,9 +7,11 @@ export const nameInProfile = document.querySelector('.profile__name')
 export const jobInProfile = document.querySelector('.profile__job')
 export const form = profilePopup.querySelector('.popup__form')
 export const avatarInProfile = document.querySelector('.profile__avatar')
+export const avatarPopup = document.querySelector('.popup_type_avatar')
+export const inputAvatarLink = avatarPopup.querySelector('.input__link')
+export const editAvatarInProfile = avatarPopup.querySelector('.popup__form')
 
-
-// переменные связанные с созданием карточки
+// Переменные связанные с созданием карточки
 export const cardTemplate = document.querySelector('#card-template').content.querySelector('.card')
 export const cardList = document.querySelector('.cards')
 export const cardPopup = document.querySelector('.popup_type_card') // Попап добавления карточки
@@ -18,5 +20,8 @@ export const inputName = addForm.querySelector('.input__name') // Поле фо�
 export const inputLink = addForm.querySelector('.input__link') // Поле формы с ссылкой. Нашли через форму
 export const cardImage = imagePopup.querySelector('.card__image')
 export const volumeLikes = document.querySelector('.card__volume-likes')
-export const cardDeletePopup = document.querySelector('.popup_type_delete') // Попап удаления карточки
-// export const cardDeleteButton = cardDeletePopup.querySelector('.popup__button_delete') // Кнопка удаления карточки
+
+// Кнопки с попапов
+export const buttonCardPopup = cardPopup.querySelector('.popup__button')
+export const buttonProfilePopup = profilePopup.querySelector('.popup__button')
+export const buttonAvatarPopup = avatarPopup.querySelector('.popup__button')

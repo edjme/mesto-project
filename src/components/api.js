@@ -46,17 +46,6 @@ export const addCard = (data) => {
     .then(onResponse)
 }
 
-//Лайки УДАЛИТЬ ЭТОТ ЗАПРОС
-export const likesCard = () => {
-    return fetch(`${config.url}/cards`, {
-        // method: 'PATCH',
-        headers: config.headers,
-        // body: JSON.stringify(dataId)
-    })
-        .then(onResponse)
-        // .then(res => console.log(res))
-}
-
 //Постановка лайка
 export const putLikesCard = (dataId) => {
     return fetch(`${config.url}/cards/likes/${dataId}`, {
@@ -71,7 +60,6 @@ export const deleteLikesCard = (dataId) => {
     return fetch(`${config.url}/cards/likes/${dataId}`, {
         method: 'DELETE',
         headers: config.headers,
-        // body: JSON.stringify(dataId)
     })
         .then(onResponse)
 }
@@ -86,14 +74,12 @@ export const removeCard = (cardId) => {
         .then(onResponse)
 }
 
-//Не придумал
-export const editCard = (dataId) => {
-    return fetch(`${config.url}/${dataId}`, {
-        method: 'PUT',
+//Обновление аватара
+export const editAvatar = (data) => {
+    return fetch(`${config.url}/users/me/avatar`, {
+        method: 'PATCH',
         headers: config.headers,
         body: JSON.stringify(data)
     })
         .then(onResponse)
 }
-
-// я проверяю работу ветки LIKER

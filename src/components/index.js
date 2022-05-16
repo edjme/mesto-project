@@ -3,7 +3,7 @@ import '../pages/index.css'
 
 //api
 import {getInitialCards, getMyProfile, changeMyProfile,
-    addCard} from './api'
+    addCard, editAvatar} from './api'
 
 // Подключение валидации
 import {enableValidation, validationConfig} from './validate'
@@ -16,7 +16,9 @@ import {profilePopup, openPopupButton, nameInPopup,
     jobInPopup, nameInProfile, jobInProfile, 
     cardList, inputName, inputLink, addForm, 
     cardPopup, imagePopup, form,
-    avatarInProfile} from './constants'
+    avatarInProfile, avatarPopup, inputAvatarLink,
+    editAvatarInProfile, buttonCardPopup, buttonProfilePopup, 
+    buttonAvatarPopup} from './constants'
 
     import {openPopup, closePopup} from './modal'
 
@@ -30,7 +32,7 @@ openPopupButton.addEventListener('click', function () {
 //ф-я передачи новых данных с попапа редактирования профиля на сервер и его отрисовка на странице 5
 function submitProfileForm(evt) {
     evt.preventDefault()
-
+    loadingOn(buttonProfilePopup)
     changeMyProfile({
         name: nameInPopup.value,
         about: jobInPopup.value
@@ -41,6 +43,9 @@ function submitProfileForm(evt) {
     })
     .catch((err) => {
         console.log(err)
+    })
+    .finally(() => {
+        loadingOff(buttonProfilePopup)
     })
 
     closePopup(profilePopup);
@@ -66,6 +71,11 @@ cardPopup.querySelector('.popup__close').addEventListener('click', function () {
     closePopup(cardPopup)
 })
 
+//закрывает попап для изменения аватара
+avatarPopup.querySelector('.popup__close').addEventListener('click', function () {
+    closePopup(avatarPopup)
+})
+
 //ф-я закрытия попапа с сохранением новых данных
 form.addEventListener('submit', submitProfileForm);
 
@@ -87,21 +97,20 @@ getInitialCards()
     dataFromServerCards.forEach(cardItem => {
         renderCard(cardList, createCard(cardItem))
     })
+})
 .catch((err) => {
     console.log(err)
-})
 })
 
 // Ф-ия передачи данных с popup card (в вёрстку) и на сервер РАБОТАЕТ 6
 function submitCardForm (evt) {
     evt.preventDefault()
-
+    loadingOn(buttonCardPopup)
     addCard({
         name: inputName.value,
         link: inputLink.value
     })
     .then(dataFromServer => {
-        console.log(cardList)
         cardList.prepend(createCard(dataFromServer))
         closePopup(cardPopup)
         inputName.value = "";
@@ -110,7 +119,48 @@ function submitCardForm (evt) {
     .catch((err) => {
         console.log(err)
     })
+    .finally(() => {
+        loadingOff(buttonCardPopup)
+    })
 }
 
 // Передача данных с popup card в вёрстку и на сервер РАБОТАЕТ 6
 addForm.addEventListener('submit', submitCardForm)
+
+
+// Открывает попап изменения аватара
+avatarInProfile.addEventListener('click', function () {
+    openPopup(avatarPopup)
+})
+
+
+function submitAvatarForm (evt) {
+    evt.preventDefault()
+    loadingOn(buttonAvatarPopup)
+    editAvatar({
+        avatar: inputAvatarLink.value
+    })
+    .then(dataFromServer => {
+        avatarInProfile.src = dataFromServer.avatar
+        closePopup(avatarPopup)
+        inputAvatarLink.value = ""
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+    .finally(() => {
+        loadingOff(buttonAvatarPopup)
+    })
+}
+
+// Обновление аватара
+editAvatarInProfile.addEventListener('submit', submitAvatarForm)
+
+// UX
+export const loadingOn = (button) => {
+    button.textContent = button.textContent + "..."
+}
+
+export const loadingOff = (button) => {
+    button.textContent = button.textContent.replace("...", "")
+}

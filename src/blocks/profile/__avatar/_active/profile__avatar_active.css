@@ -1,11 +1,12 @@
- .profile__avatar_active {
-     display: flex;
+.profile__avatar_active {
+    display: flex;
     margin: 0;
     padding: 0;
     margin-right: 30px;
     width: 120px;
     height: 120px;
     cursor: pointer;
+    border-radius: 50%;
 }
 
 .profile__avatar_active:hover {
