@@ -112,7 +112,7 @@ addForm.addEventListener('submit', (event) => {
         link: inputLink.value
     })
     .then(dataFromServer => {
-        renderCard(cardList, createCard(dataFromServer))
+        cardList.prepend(createCard(dataFromServer))
         closePopup(cardPopup)
         inputName.value = "";
         inputLink.value = "";
