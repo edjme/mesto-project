@@ -40,6 +40,7 @@ function submitProfileForm(evt) {
     .then(dataFromServer => {
         nameInProfile.textContent = nameInPopup.value;
         jobInProfile.textContent = jobInPopup.value;
+        closePopup(profilePopup);
     })
     .catch((err) => {
         console.log(err)
@@ -47,8 +48,6 @@ function submitProfileForm(evt) {
     .finally(() => {
         loadingOff(buttonProfilePopup)
     })
-
-    closePopup(profilePopup);
 }
 
 // открывает попап для создания карточки
@@ -79,27 +78,24 @@ avatarPopup.querySelector('.popup__close').addEventListener('click', function ()
 //ф-я закрытия попапа с сохранением новых данных
 form.addEventListener('submit', submitProfileForm);
 
-// Отрисовка данных пользователя с сервера РАБОТАЕТ 3
-getMyProfile()
-.then((getProfile) => {
+Promise.all([
+    getMyProfile(),
+    getInitialCards()
+])
+.then(([getProfile, cardItem]) => {
+    // Отрисовка данных пользователя с сервера РАБОТАЕТ 3
     nameInProfile.textContent = getProfile.name;
     jobInProfile.textContent = getProfile.about;
     avatarInProfile.src = getProfile.avatar;
     nameInProfile.id = getProfile._id;
-})
-.catch((err) => {
-    console.log(err)
-})
 
-// Отрисовка карточек с сервера РАБОТАЕТ 4
-getInitialCards()
-.then((dataFromServerCards) => {
-    dataFromServerCards.forEach(cardItem => {
+    // Отрисовка карточек с сервера РАБОТАЕТ 4
+    cardItem.forEach(cardItem => {
         renderCard(cardList, createCard(cardItem))
     })
 })
-.catch((err) => {
-    console.log(err)
+.catch(err => {
+    console.log(err);
 })
 
 // Ф-ия передачи данных с popup card (в вёрстку) и на сервер РАБОТАЕТ 6
@@ -113,8 +109,7 @@ function submitCardForm (evt) {
     .then(dataFromServer => {
         cardList.prepend(createCard(dataFromServer))
         closePopup(cardPopup)
-        inputName.value = "";
-        inputLink.value = "";
+        addForm.reset();
     })
     .catch((err) => {
         console.log(err)
