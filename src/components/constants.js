@@ -25,3 +25,17 @@ export const volumeLikes = document.querySelector('.card__volume-likes')
 export const buttonCardPopup = cardPopup.querySelector('.popup__button')
 export const buttonProfilePopup = profilePopup.querySelector('.popup__button')
 export const buttonAvatarPopup = avatarPopup.querySelector('.popup__button')
+
+// Валидация
+
+
+export const validationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__line',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup_line-error',
+}
+
+export const forms = document.querySelector(validationConfig.formSelector);
+export const submitButton = forms.querySelectorAll(validationConfig.submitButtonSelector);

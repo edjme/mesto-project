@@ -6,7 +6,8 @@ import {getInitialCards, getMyProfile, changeMyProfile,
     addCard, editAvatar} from './api'
 
 // Подключение валидации
-import {enableValidation, validationConfig} from './validate'
+import {enableValidation, validationConfig, toggleButtonState} from './validate'
+
 enableValidation(validationConfig)
 
 // Подключение отрисовки карточек
@@ -32,6 +33,10 @@ openPopupButton.addEventListener('click', function () {
 //ф-я передачи новых данных с попапа редактирования профиля на сервер и его отрисовка на странице 5
 function submitProfileForm(evt) {
     evt.preventDefault()
+console.log(evt)
+    const forms = document.querySelector(validationConfig.formSelector);
+    const submitButton = forms.querySelector(validationConfig.submitButtonSelector);
+    
     loadingOn(buttonProfilePopup)
     changeMyProfile({
         name: nameInPopup.value,
@@ -46,7 +51,9 @@ function submitProfileForm(evt) {
         console.log(err)
     })
     .finally(() => {
+        
         loadingOff(buttonProfilePopup)
+        toggleButtonState(submitButton, false, validationConfig)
     })
 }
 
@@ -131,6 +138,10 @@ avatarInProfile.addEventListener('click', function () {
 
 function submitAvatarForm (evt) {
     evt.preventDefault()
+
+    const forms = document.querySelector(validationConfig.formSelector);
+    const submitButton = forms.querySelector(validationConfig.submitButtonSelector);
+
     loadingOn(buttonAvatarPopup)
     editAvatar({
         avatar: inputAvatarLink.value
@@ -145,6 +156,7 @@ function submitAvatarForm (evt) {
     })
     .finally(() => {
         loadingOff(buttonAvatarPopup)
+        toggleButtonState(submitButton, false, validationConfig)
     })
 }
 
