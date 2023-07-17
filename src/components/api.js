@@ -1,5 +1,5 @@
 const config = {
-  url: 'https://nomoreparties.co/v1/plus-cohort-9',
+  url: 'https://pm2.webplus.hloud.tw1.ru',
   headers: {
     authorization: '42de998b-e70a-417c-91c6-8efdcf613573',
     'Content-type': 'application/json'
